@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.google.pubsub.kafka.connect</groupId>
   <artifactId>kafka-connector</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>Archetype - kafka-connector</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -113,7 +113,7 @@
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer" />
               </transformers>
-              <finalName>cps-kafka-connector</finalName>
+              <finalName>cps-kafka-connector-${version}</finalName>
             </configuration>
           </execution>
         </executions>
