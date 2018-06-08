@@ -21,11 +21,16 @@ import io.grpc.Channel;
 import io.grpc.ClientInterceptors;
 import io.grpc.ManagedChannel;
 import io.grpc.auth.ClientAuthInterceptor;
+import io.grpc.internal.GrpcUtil;
 import io.grpc.netty.NegotiationType;
 import io.grpc.netty.NettyChannelBuilder;
+import org.apache.kafka.common.config.ConfigDef;
+
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
 
 /** Utility methods and constants that are repeated across one or more classes. */
@@ -50,8 +55,8 @@ public class ConnectorUtils {
   /** Return {@link io.grpc.Channel} which is used by Cloud Pub/Sub gRPC API's. */
   public static Channel getChannel() throws IOException {
     ManagedChannel channelImpl =
-        NettyChannelBuilder
-                .forAddress(ENDPOINT, 443).negotiationType(NegotiationType.TLS)
+        NettyChannelBuilder.forAddress(ENDPOINT, 443)
+                .negotiationType(NegotiationType.TLS)
                 .maxInboundMessageSize(8388608)
                 .build();
     final ClientAuthInterceptor interceptor =
@@ -60,4 +65,5 @@ public class ConnectorUtils {
             Executors.newCachedThreadPool());
     return ClientInterceptors.intercept(channelImpl, interceptor);
   }
+
 }
